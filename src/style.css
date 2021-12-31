@@ -1,0 +1,95 @@
+body {
+  background: rgba(139, 192, 216, 0.73) 80%;
+}
+
+.container {
+  margin-top: 50px;
+  max-width: 50%;
+  font-family: "Open Sans", sans-serif;
+}
+
+.city-prompt,
+.search {
+  font-size: 20px;
+  text-align: center;
+}
+
+.fa-location-arrow {
+  padding: 0;
+  border: none;
+  background: none;
+  color: #4284f2;
+}
+.hide {
+  display: none;
+}
+
+.weather-alert {
+  cursor: pointer;
+}
+
+.weather-alert:hover + .hide {
+  margin-left: 5px;
+  display: block;
+  color: #e67331;
+  font-size: 16px;
+  font-weight: bolder;
+}
+
+.currently-in {
+  padding-top: 10px;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+}
+
+.current-weather {
+  font-size: 35px;
+  text-align: center;
+}
+
+.current-weather-icon {
+  font-size: 60px;
+  opacity: 75%;
+}
+.current-temperature {
+  text-align: center;
+  font-size: 40px;
+}
+.weather-details,
+.current-time {
+  font-size: 15px;
+  font-style: italic;
+  text-align: center;
+  font-family: "PT Mono", monospace;
+}
+
+.date,
+.weather-icon {
+  text-align: center;
+  font-size: 30px;
+}
+
+.temp-type {
+  font-size: 12px;
+  vertical-align: top;
+}
+
+.celcius-type,
+.feren-type {
+  padding: 0;
+  border: none;
+  background: none;
+  color: #4f8ba5;
+  font-weight: bolder;
+}
+
+.celcius-type:hover,
+.feren-type:hover {
+  text-decoration: underline;
+}
+
+.weather-conditions {
+  text-transform: capitalize;
+}
