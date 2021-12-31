@@ -93,3 +93,7 @@ body {
 .weather-conditions {
   text-transform: capitalize;
 }
+
+.github-link {
+  text-align: center;
+}
