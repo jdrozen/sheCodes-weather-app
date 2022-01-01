@@ -1,23 +1,27 @@
-let now = new Date();
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday"
-];
-let day = days[now.getDay()];
-let hours = now.getHours();
-let minutes = now.getMinutes();
-if (minutes < 10) {
-  minutes = "0" + minutes;
-}
-let formattedDate = `${day}, ${hours}:${minutes}`;
-let currentTime = document.querySelector("#current-time");
-currentTime.innerHTML = formattedDate;
 
+function formatDate(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[date.getDay()];
+  return `${day} ${hours}:${minutes}`;
+}
 function setCurrentCity(event) {
   event.preventDefault();
   let cityInput = document.querySelector("#city-input");
@@ -35,16 +39,22 @@ function showCurrentTemperature(response) {
   console.log(response);
   let cityName = response.data.name;
   let cityDisplay = document.querySelector("#city-display");
-  let country = response.data.sys.country;
-  cityDisplay.innerHTML = `${cityName}, ${country}`;
-  let currentTemperature = response.data.main.temp;
-  currentTemperature = Math.round(currentTemperature);
-  console.log(currentTemperature);
-  let weatherConditions = response.data.weather[0].description;
   let displayWeatherConditions = document.querySelector("#weather-conditions");
-  displayWeatherConditions.innerHTML = weatherConditions;
   let displayTemperature = document.querySelector("#temperature");
+  let country = response.data.sys.country;
+  let currentTemperature = response.data.main.temp;
+  let weatherConditions = response.data.weather[0].description;
+  let humidityElement = document.querySelector("#humidity");
+  let windElement = document.querySelector("#wind"); 
+  cityDisplay.innerHTML = `${cityName}, ${country}`;
+  currentTemperature = Math.round(currentTemperature);
+  displayWeatherConditions.innerHTML = weatherConditions;
   displayTemperature.innerHTML = `${currentTemperature}°F`;
+  humidityElement.innerHTML = `${response.data.main.humidity}%`; 
+  windElement.innerHTML = `${Math.round(response.data.wind.speed)} mph`; 
+  let date = document.querySelector("#date");
+  let timestamp = response.data.dt;
+  date.innerHTML = `${formatDate(timestamp)}`;
 }
 
 function handlePosition(position) {
