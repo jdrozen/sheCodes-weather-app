@@ -100,8 +100,11 @@ body {
 
 .weather-stats {
   list-style: none;
-  padding-top: 80px;
+  padding-top: 30px;
   font-size: 18px;
   font-family: "PT Mono", monospace;
-  text-align: center;
+  text-align: left;
+}
+.fa-cloud-rain, .fa-tint, .fa-wind {
+  font-size: 20px;
 }
