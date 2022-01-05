@@ -36,6 +36,7 @@ let cityForm = document.querySelector("#city-form");
 cityForm.addEventListener("submit", setCurrentCity);
 
 function showCurrentTemperature(response) {
+  console.log(response);
   let cityName = response.data.name;
   let cityDisplay = document.querySelector("#city-display");
   let displayWeatherConditions = document.querySelector("#weather-conditions");
@@ -46,6 +47,8 @@ function showCurrentTemperature(response) {
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind"); 
   let weatherIcon = document.querySelector("#weather-icon");
+  let feelsLike = document.querySelector("#temperature-details")
+  feelsLike.innerHTML = `The temperature feels like ${Math.round(response.data.main.feels_like)}°F`
   cityDisplay.innerHTML = `${cityName}, ${country}`;
   currentTemperature = Math.round(currentTemperature);
   displayWeatherConditions.innerHTML = weatherConditions;
