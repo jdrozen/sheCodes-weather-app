@@ -35,7 +35,7 @@ function setCurrentCity(event) {
 let cityForm = document.querySelector("#city-form");
 cityForm.addEventListener("submit", setCurrentCity);
 
-function showCurrentTemperature(response)
+function showCurrentTemperature(response) {
   let cityName = response.data.name;
   let cityDisplay = document.querySelector("#city-display");
   let displayWeatherConditions = document.querySelector("#weather-conditions");
