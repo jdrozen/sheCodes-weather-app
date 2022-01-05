@@ -36,7 +36,6 @@ let cityForm = document.querySelector("#city-form");
 cityForm.addEventListener("submit", setCurrentCity);
 
 function showCurrentTemperature(response) {
-  console.log(response);
   let cityName = response.data.name;
   let cityDisplay = document.querySelector("#city-display");
   let displayWeatherConditions = document.querySelector("#weather-conditions");
@@ -46,12 +45,15 @@ function showCurrentTemperature(response) {
   let weatherConditions = response.data.weather[0].description;
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind"); 
+  let weatherIcon = document.querySelector("#weather-icon");
   cityDisplay.innerHTML = `${cityName}, ${country}`;
   currentTemperature = Math.round(currentTemperature);
   displayWeatherConditions.innerHTML = weatherConditions;
   displayTemperature.innerHTML = `${currentTemperature}°F`;
   humidityElement.innerHTML = `${response.data.main.humidity}%`; 
   windElement.innerHTML = `${Math.round(response.data.wind.speed)} mph`; 
+  weatherIcon.setAttribute ("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
+  weatherIcon.setAttribute ("alt", response.data.weather[0].description);
   let date = document.querySelector("#date");
   let timestamp = response.data.dt;
   date.innerHTML = `${formatDate(timestamp)}`;
