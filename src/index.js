@@ -36,6 +36,7 @@ let cityForm = document.querySelector("#city-form");
 cityForm.addEventListener("submit", setCurrentCity);
 
 function showCurrentTemperature(response) {
+
   let cityName = response.data.name;
   let cityDisplay = document.querySelector("#city-display");
   let displayWeatherConditions = document.querySelector("#weather-conditions");
@@ -60,6 +61,7 @@ function showCurrentTemperature(response) {
   let timestamp = response.data.dt;
   date.innerHTML = `${formatDate(timestamp)}`;
 }
+
 
 function handlePosition(position) {
   console.log(position.coords.latitude);
