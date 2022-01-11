@@ -5,6 +5,30 @@ function convertFToC(degrees) {
 function convertCToF(degrees) {
   return Math.round((degrees * 9/5) + 32)
 }
+
+let unitType = "F"; 
+let currentTemperature = 0; 
+let currentFeelsLike = 0; 
+
+function switchUnit(event) {
+
+  if (unitType === "F") {
+    currentTemperature = convertFToC(currentTemperature);
+    currentFeelsLike = convertFToC(currentFeelsLike);
+    unitType = "C"
+  }
+  else {
+    currentTemperature = convertCToF(currentTemperature);
+    currentFeelsLike = convertCToF(currentFeelsLike); 
+    unitType = "F"
+  }; 
+
+  let temperature = document.querySelector("#temperature")
+  temperature.innerHTML = `${currentTemperature}°${unitType}`
+  let feelsLike = document.querySelector("#temperature-details")
+  feelsLike.innerHTML = `The temperature feels like ${Math.round(currentFeelsLike)}°${unitType}`
+  
+}
 function formatDate(timestamp) {
   let date = new Date(timestamp * 1000);
   let hours = date.getHours();
@@ -48,17 +72,24 @@ function showCurrentTemperature(response) {
   let displayWeatherConditions = document.querySelector("#weather-conditions");
   let displayTemperature = document.querySelector("#temperature");
   let country = response.data.sys.country;
-  let currentTemperature = response.data.main.temp;
+  currentTemperature = response.data.main.temp;
+  if (unitType === "C") {
+    currentTemperature = convertFToC(currentTemperature); 
+  }
+  currentFeelsLike = response.data.main.feels_like; 
+  if (unitType === "C") {
+    currentFeelsLike = convertFToC(currentFeelsLike); 
+  }
   let weatherConditions = response.data.weather[0].description;
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind"); 
   let weatherIcon = document.querySelector("#weather-icon");
   let feelsLike = document.querySelector("#temperature-details")
-  feelsLike.innerHTML = `The temperature feels like ${Math.round(response.data.main.feels_like)}°F`
+  feelsLike.innerHTML = `The temperature feels like ${Math.round(currentFeelsLike)}°${unitType}`
   cityDisplay.innerHTML = `${cityName}, ${country}`;
   currentTemperature = Math.round(currentTemperature);
   displayWeatherConditions.innerHTML = weatherConditions;
-  displayTemperature.innerHTML = `${currentTemperature}°F (${convertFToC(currentTemperature)}°C)`;
+  displayTemperature.innerHTML = `${currentTemperature}°${unitType}`;
   humidityElement.innerHTML = `${response.data.main.humidity}%`; 
   windElement.innerHTML = `${Math.round(response.data.wind.speed)} mph`; 
   weatherIcon.setAttribute ("src", `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
@@ -87,3 +118,6 @@ function handleNavigator() {
 
 let currentLocation = document.querySelector("#current-location");
 currentLocation.addEventListener("click", handleNavigator);
+
+let unitButton = document.querySelector("#unit-button");
+unitButton.addEventListener("click", switchUnit);
