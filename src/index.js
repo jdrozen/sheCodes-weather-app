@@ -52,14 +52,18 @@ function formatDate(timestamp) {
   let day = days[date.getDay()];
   return `${day} ${hours}:${minutes}`;
 }
-function setCurrentCity(event) {
-  event.preventDefault();
-  let cityInput = document.querySelector("#city-input");
-  let city = cityInput.value;
+function queryCityApi(city) { 
   let units = "imperial";
   apiKey = "2812a6b87c95b254d246645097699277";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${apiKey}`;
   axios.get(apiUrl).then(showCurrentTemperature);
+}
+
+function setCurrentCity(event) {
+  event.preventDefault();
+  let cityInput = document.querySelector("#city-input");
+  let city = cityInput.value;
+  queryCityApi(city);
 }
 
 let cityForm = document.querySelector("#city-form");
@@ -121,3 +125,5 @@ currentLocation.addEventListener("click", handleNavigator);
 
 let unitButton = document.querySelector("#unit-button");
 unitButton.addEventListener("click", switchUnit);
+
+queryCityApi("Boston"); 
