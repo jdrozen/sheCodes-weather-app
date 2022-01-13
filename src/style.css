@@ -65,12 +65,16 @@ body {
   font-family: "PT Mono", monospace;
 }
 
-.date,
-.weather-icon {
+.weather-forecast {
   text-align: center;
-  font-size: 30px;
+  font-size: 18px;
 }
-
+.weather-forecast-temperature { 
+  font-size: 20px;
+}
+.weather-forecast-temperature-min {
+  opacity: .5;
+}
 .temp-type {
   font-size: 12px;
   vertical-align: top;
