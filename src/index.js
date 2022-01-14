@@ -103,6 +103,30 @@ function showCurrentTemperature(response) {
   date.innerHTML = `${formatDate(timestamp)}`;
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast"); 
+  let days = ["Thursday", "Friday", "Saturday", "Sunday", "Monday"]; 
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (days) {
+    forecastHTML = forecastHTML + `
+    <div class="col">
+    <div class="weather-forecast-date">
+    ${days}
+    </div>
+    <div class="weather-forecast-icon">
+    <img src="https://openweathermap.org/img/wn/04n@2x.png" alt="" width="60">
+    </div>
+    <div class="weather-forecast-temperature">
+    <span class="weather-forecast-temperature-max">16°</span>
+    <span class="weather-forecast-temperature-min">2°</span>
+    </div>
+    </div> `;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML; 
+}
+
+
 
 function handlePosition(position) {
   console.log(position.coords.latitude);
@@ -127,3 +151,4 @@ let unitButton = document.querySelector("#unit-button");
 unitButton.addEventListener("click", switchUnit);
 
 queryCityApi("Boston"); 
+displayForecast();
