@@ -1,36 +1,20 @@
+//Global Variables//
+let UNITS = "F";
+let TEMPERATURE = 0;
+let FEELS_LIKE = 0;
+const API_KEY = "2812a6b87c95b254d246645097699277";
+
+//Helper Functions//
 function convertFToC(degrees) {
-  return Math.round((degrees-32) * 5/9)
+  return Math.round(((degrees - 32) * 5) / 9);
 }
 
 function convertCToF(degrees) {
-  return Math.round((degrees * 9/5) + 32)
+  return Math.round((degrees * 9) / 5 + 32);
 }
 
-let unitType = "F"; 
-let currentTemperature = 0; 
-let currentFeelsLike = 0; 
-
-function switchUnit(event) {
-
-  if (unitType === "F") {
-    currentTemperature = convertFToC(currentTemperature);
-    currentFeelsLike = convertFToC(currentFeelsLike);
-    unitType = "C"
-  }
-  else {
-    currentTemperature = convertCToF(currentTemperature);
-    currentFeelsLike = convertCToF(currentFeelsLike); 
-    unitType = "F"
-  }; 
-
-  let temperature = document.querySelector("#temperature")
-  temperature.innerHTML = `${currentTemperature}°${unitType}`
-  let feelsLike = document.querySelector("#temperature-details")
-  feelsLike.innerHTML = `The temperature feels like ${Math.round(currentFeelsLike)}°${unitType}`
-  
-}
 function formatDate(timestamp) {
-  let date = new Date(timestamp * 1000);
+  const date = new Date(timestamp * 1000);
   let hours = date.getHours();
   if (hours < 10) {
     hours = `0${hours}`;
@@ -40,7 +24,7 @@ function formatDate(timestamp) {
     minutes = `0${minutes}`;
   }
 
-  let days = [
+  const days = [
     "Sunday",
     "Monday",
     "Tuesday",
@@ -49,66 +33,104 @@ function formatDate(timestamp) {
     "Friday",
     "Saturday",
   ];
-  let day = days[date.getDay()];
+  const day = days[date.getDay()];
   return `${day} ${hours}:${minutes}`;
 }
-function queryCityApi(city) { 
-  let units = "imperial";
-  apiKey = "2812a6b87c95b254d246645097699277";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${apiKey}`;
+
+// Given a city string (i.e "Boston"), query the weather API and
+// Call showCurrentTemperature with the response
+function queryCityApi(city) {
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${API_KEY}`;
   axios.get(apiUrl).then(showCurrentTemperature);
 }
 
-function setCurrentCity(event) {
-  event.preventDefault();
-  let cityInput = document.querySelector("#city-input");
-  let city = cityInput.value;
-  queryCityApi(city);
+//Handlers//
+function handleSwitchUnit(event) {
+  // Calculate the new temperature
+  if (UNITS === "F") {
+    TEMPERATURE = convertFToC(TEMPERATURE);
+    FEELS_LIKE = convertFToC(FEELS_LIKE);
+    UNITS = "C";
+  } else {
+    TEMPERATURE = convertCToF(TEMPERATURE);
+    FEELS_LIKE = convertCToF(FEELS_LIKE);
+    UNITS = "F";
+  }
+  // Set the HTML to have the new temperature
+  let HTMLTemperature = document.querySelector("#temperature");
+  HTMLTemperature.innerHTML = `${TEMPERATURE}°${UNITS}`;
+  let feelsLike = document.querySelector("#temperature-details");
+  feelsLike.innerHTML = `The temperature feels like ${FEELS_LIKE}°${UNITS}`;
 }
 
-let cityForm = document.querySelector("#city-form");
-cityForm.addEventListener("submit", setCurrentCity);
+function handleCityFormSubmission(event) {
+  event.preventDefault();
+  let cityInput = document.querySelector("#city-input");
+  queryCityApi(cityInput.value);
+}
+
+//Callback for the weather API when the location button is clicked
+function geoLocationCallback(position) {
+  const latitude = position.coords.latitude;
+  const longitude = position.coords.longitude;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=imperial`;
+  axios.get(apiUrl).then(showCurrentTemperature);
+}
+
+function handleSearchCurrentLocation() {
+  navigator.geolocation.getCurrentPosition(geoLocationCallback);
+}
 
 function showCurrentTemperature(response) {
-
+  // First, unpack the response
   let cityName = response.data.name;
-  let cityDisplay = document.querySelector("#city-display");
-  let displayWeatherConditions = document.querySelector("#weather-conditions");
-  let displayTemperature = document.querySelector("#temperature");
   let country = response.data.sys.country;
-  currentTemperature = response.data.main.temp;
-  if (unitType === "C") {
-    currentTemperature = convertFToC(currentTemperature); 
-  }
-  currentFeelsLike = response.data.main.feels_like; 
-  if (unitType === "C") {
-    currentFeelsLike = convertFToC(currentFeelsLike); 
-  }
   let weatherConditions = response.data.weather[0].description;
-  let humidityElement = document.querySelector("#humidity");
-  let windElement = document.querySelector("#wind"); 
-  let weatherIcon = document.querySelector("#weather-icon");
-  let feelsLike = document.querySelector("#temperature-details")
-  feelsLike.innerHTML = `The temperature feels like ${Math.round(currentFeelsLike)}°${unitType}`
-  cityDisplay.innerHTML = `${cityName}, ${country}`;
-  currentTemperature = Math.round(currentTemperature);
-  displayWeatherConditions.innerHTML = weatherConditions;
-  displayTemperature.innerHTML = `${currentTemperature}°${unitType}`;
-  humidityElement.innerHTML = `${response.data.main.humidity}%`; 
-  windElement.innerHTML = `${Math.round(response.data.wind.speed)} mph`; 
-  weatherIcon.setAttribute ("src", `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
-  weatherIcon.setAttribute ("alt", response.data.weather[0].description);
-  let date = document.querySelector("#date");
   let timestamp = response.data.dt;
+  TEMPERATURE = response.data.main.temp;
+  if (UNITS === "C") {
+    TEMPERATURE = convertFToC(TEMPERATURE);
+  }
+  FEELS_LIKE = response.data.main.feels_like;
+  if (UNITS === "C") {
+    FEELS_LIKE = convertFToC(FEELS_LIKE);
+  }
+  TEMPERATURE = Math.round(TEMPERATURE);
+  FEELS_LIKE = Math.round(FEELS_LIKE);
+
+  // Second, gather the HTML elements we need to update
+  let cityDisplay = document.querySelector("#city-display");
+  let weatherIcon = document.querySelector("#weather-icon");
+  let displayTemperature = document.querySelector("#temperature");
+  let feelsLike = document.querySelector("#temperature-details");
+  let displayWeatherConditions = document.querySelector("#weather-conditions");
+  let humidityElement = document.querySelector("#humidity");
+  let windElement = document.querySelector("#wind");
+  let date = document.querySelector("#date");
+
+  // Lastly, update the innerHTML
+  cityDisplay.innerHTML = `${cityName}, ${country}`;
+  weatherIcon.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  weatherIcon.setAttribute("alt", response.data.weather[0].description);
+  displayTemperature.innerHTML = `${TEMPERATURE}°${UNITS}`;
+  feelsLike.innerHTML = `The temperature feels like ${FEELS_LIKE}°${UNITS}`;
+  displayWeatherConditions.innerHTML = weatherConditions;
+  humidityElement.innerHTML = `${response.data.main.humidity}%`;
+  windElement.innerHTML = `${Math.round(response.data.wind.speed)} mph`;
   date.innerHTML = `${formatDate(timestamp)}`;
 }
 
-function displayForecast() {
-  let forecastElement = document.querySelector("#forecast"); 
-  let days = ["Thursday", "Friday", "Saturday", "Sunday", "Monday"]; 
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  let days = ["Thursday", "Friday", "Saturday", "Sunday", "Monday"];
   let forecastHTML = `<div class="row">`;
   days.forEach(function (days) {
-    forecastHTML = forecastHTML + `
+    forecastHTML =
+      forecastHTML +
+      `
     <div class="col">
     <div class="weather-forecast-date">
     ${days}
@@ -123,32 +145,17 @@ function displayForecast() {
     </div> `;
   });
   forecastHTML = forecastHTML + `</div>`;
-  forecastElement.innerHTML = forecastHTML; 
+  forecastElement.innerHTML = forecastHTML;
 }
 
-
-
-function handlePosition(position) {
-  console.log(position.coords.latitude);
-  console.log(position.coords.longitude);
-  let apiKey = "2812a6b87c95b254d246645097699277";
-  let latitude = position.coords.latitude;
-  let longitude = position.coords.longitude;
-  let units = "imperial";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
-  axios.get(apiUrl).then(showCurrentTemperature);
-}
-
-function handleNavigator() {
-  console.log("here");
-  navigator.geolocation.getCurrentPosition(handlePosition);
-}
-
-let currentLocation = document.querySelector("#current-location");
-currentLocation.addEventListener("click", handleNavigator);
+//Main Script//
+queryCityApi("Boston");
+displayForecast();
+let searchCurrentLocation = document.querySelector("#current-location");
+searchCurrentLocation.addEventListener("click", handleSearchCurrentLocation);
 
 let unitButton = document.querySelector("#unit-button");
-unitButton.addEventListener("click", switchUnit);
+unitButton.addEventListener("click", handleSwitchUnit);
 
-queryCityApi("Boston"); 
-displayForecast();
+let cityForm = document.querySelector("#city-form");
+cityForm.addEventListener("submit", handleCityFormSubmission);

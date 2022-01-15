@@ -72,11 +72,11 @@ body {
   font-size: 18px;
   text-align: center;
 }
-.weather-forecast-temperature { 
+.weather-forecast-temperature {
   font-size: 20px;
 }
 .weather-forecast-temperature-min {
-  opacity: .5;
+  opacity: 0.5;
 }
 .temp-type {
   font-size: 12px;
@@ -113,12 +113,13 @@ body {
   font-family: "PT Mono", monospace;
   text-align: left;
 }
-.fa-cloud-rain, .fa-tint, .fa-wind {
+.fa-cloud-rain,
+.fa-tint,
+.fa-wind {
   font-size: 20px;
 }
 
 .unit-button {
- display: block;
- margin: 0 auto;
-
+  display: block;
+  margin: 0 auto;
 }
