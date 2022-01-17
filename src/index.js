@@ -2,6 +2,7 @@
 let UNITS = "F";
 let TEMPERATURE = 0;
 let FEELS_LIKE = 0;
+let FORECAST = [];
 const API_KEY = "2812a6b87c95b254d246645097699277";
 const days = [
   "Sunday",
@@ -42,6 +43,17 @@ function formatTimestamp(timestamp) {
   return days[day];
 }
 
+// Takes in a temperature and returns the rounded version of itself,
+// converted to Celcius if needed
+function getTemp(temperature) {
+  if (UNITS === "C") {
+    temperature = convertFToC(temperature);
+  } else {
+    temperature = Math.round(temperature);
+  }
+  return temperature;
+}
+
 // Given a city string (i.e "Boston"), query the weather API and
 // Call showCurrentTemperature with the response
 function queryCityApi(city) {
@@ -66,6 +78,9 @@ function handleSwitchUnit(event) {
   HTMLTemperature.innerHTML = `${TEMPERATURE}°${UNITS}`;
   let feelsLike = document.querySelector("#temperature-details");
   feelsLike.innerHTML = `The temperature feels like ${FEELS_LIKE}°${UNITS}`;
+
+  //Re-display Forecast (it handles its own unit conversion)
+  displayForecast(FORECAST);
 }
 
 function handleCityFormSubmission(event) {
@@ -93,16 +108,8 @@ function showCurrentTemperature(response) {
   let country = response.data.sys.country;
   let weatherConditions = response.data.weather[0].description;
   let timestamp = response.data.dt;
-  TEMPERATURE = response.data.main.temp;
-  if (UNITS === "C") {
-    TEMPERATURE = convertFToC(TEMPERATURE);
-  }
-  FEELS_LIKE = response.data.main.feels_like;
-  if (UNITS === "C") {
-    FEELS_LIKE = convertFToC(FEELS_LIKE);
-  }
-  TEMPERATURE = Math.round(TEMPERATURE);
-  FEELS_LIKE = Math.round(FEELS_LIKE);
+  TEMPERATURE = getTemp(response.data.main.temp);
+  FEELS_LIKE = getTemp(response.data.main.feels_like);
 
   // Second, gather the HTML elements we need to update
   let cityDisplay = document.querySelector("#city-display");
@@ -134,11 +141,16 @@ function showCurrentTemperature(response) {
 // API for daily forecast
 function showForecast(coordinates) {
   let apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${API_KEY}&units=imperial`;
-  axios.get(apiURL).then(displayForecast);
+  axios.get(apiURL).then(handleForecastApiResponse);
 }
 
-function displayForecast(response) {
+function handleForecastApiResponse(response) {
   let forecastData = response.data.daily;
+  FORECAST = forecastData;
+  displayForecast(forecastData);
+}
+
+function displayForecast(forecastData) {
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
   forecastData.forEach(function (forecastDay, index) {
@@ -156,10 +168,10 @@ function displayForecast(response) {
     }.png" alt="" width="60">
     </div>
     <div class="weather-forecast-temperature">
-    <span class="weather-forecast-temperature-max">${Math.round(
+    <span class="weather-forecast-temperature-max">${getTemp(
       forecastDay.temp.max
     )}°</span>
-    <span class="weather-forecast-temperature-min">${Math.round(
+    <span class="weather-forecast-temperature-min">${getTemp(
       forecastDay.temp.min
     )}°</span>
     </div>
