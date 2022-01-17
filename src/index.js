@@ -83,6 +83,7 @@ function handleSearchCurrentLocation() {
 
 function showCurrentTemperature(response) {
   // First, unpack the response
+  console.log(response.data);
   let cityName = response.data.name;
   let country = response.data.sys.country;
   let weatherConditions = response.data.weather[0].description;
@@ -121,9 +122,19 @@ function showCurrentTemperature(response) {
   humidityElement.innerHTML = `${response.data.main.humidity}%`;
   windElement.innerHTML = `${Math.round(response.data.wind.speed)} mph`;
   date.innerHTML = `${formatDate(timestamp)}`;
+
+  showForecast(response.data.coord);
+}
+
+// API for daily forecast
+function showForecast(coordinates) {
+  let apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${API_KEY}&units=imperial`;
+  console.log(apiURL);
+  axios.get(apiURL).then(displayForecast);
 }
 
 function displayForecast(response) {
+  console.log(response.data);
   let forecastElement = document.querySelector("#forecast");
   let days = ["Thursday", "Friday", "Saturday", "Sunday", "Monday"];
   let forecastHTML = `<div class="row">`;
@@ -150,7 +161,6 @@ function displayForecast(response) {
 
 //Main Script//
 queryCityApi("Boston");
-displayForecast();
 let searchCurrentLocation = document.querySelector("#current-location");
 searchCurrentLocation.addEventListener("click", handleSearchCurrentLocation);
 
