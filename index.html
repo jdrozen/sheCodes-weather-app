@@ -75,25 +75,26 @@
                   />
                 </symbol>
               </svg>
-              <!-- <div
-                class="alert alert-warning d-flex align-items-center"
-                role="alert"
+          <div class="weatherEventElement" id="weather-event-element">
+              <div
+              class="alert alert-warning d-flex align-items-center"
+              role="alert"
               >
-                <svg
-                  class="bi flex-shrink-0 me-2"
-                  width="24"
-                  height="24"
-                  role="img"
-                  aria-label="Warning:"
-                >
-                  <use xlink:href="#exclamation-triangle-fill" />
-                </svg>
-                <div class="weather-alert">Severe Weather Watch</div>
-                <div class="hide">
-                  <i class="fas fa-exclamation-triangle"></i> Wind Advisory
-                  Remains in Effect
-                </div>
-              </div> -->
+              <svg
+              class="bi flex-shrink-0 me-2"
+              width="24"
+              height="24"
+              role="img"
+              aria-label="Warning:"
+              >
+              <use xlink:href="#exclamation-triangle-fill" />
+            </svg>
+            <div class="weather-alert" id="weather-event"></div>
+            <div class="hide">
+              <i class="fas fa-exclamation-triangle weather-alert-description" id="weather-alert-description"></i>
+            </div>
+          </div>
+              </div>
               <h1 class="card-text currently-in">
                 <span id="city-display"></span>
               </h1>

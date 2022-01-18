@@ -148,6 +148,15 @@ function handleForecastApiResponse(response) {
   let forecastData = response.data.daily;
   FORECAST = forecastData;
   displayForecast(forecastData);
+  console.log(response.data.alerts);
+  if (response.data.alerts) {
+    let weatherAlert = response.data.alerts[0].description;
+    let weatherAlertEvent = response.data.alerts[0].event;
+    displayWeatherAlert(weatherAlertEvent, weatherAlert);
+  } else {
+    let weatherAlertHTML = document.querySelector("#weather-event-element");
+    weatherAlertHTML.innerHTML = null;
+  }
 }
 
 function displayForecast(forecastData) {
@@ -181,6 +190,15 @@ function displayForecast(forecastData) {
 
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
+}
+
+function displayWeatherAlert(weatherAlertEvent, weatherAlert) {
+  let weatherEvent = document.querySelector("#weather-event");
+  let weatherAlertDescription = document.querySelector(
+    "#weather-alert-description"
+  );
+  weatherEvent.innerHTML = weatherAlertEvent;
+  weatherAlertDescription.innerHTML = weatherAlert;
 }
 
 //Main Script//
