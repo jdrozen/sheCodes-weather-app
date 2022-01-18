@@ -50,7 +50,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col">
-              <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+              <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
                 <symbol
                   id="check-circle-fill"
                   fill="currentColor"
@@ -75,70 +75,68 @@
                   />
                 </symbol>
               </svg>
-          <div class="weatherEventElement" id="weather-event-element">
-              <div
-              class="alert alert-warning d-flex align-items-center"
-              role="alert"
-              >
-              <svg
-              class="bi flex-shrink-0 me-2"
-              width="24"
-              height="24"
-              role="img"
-              aria-label="Warning:"
-              >
-              <use xlink:href="#exclamation-triangle-fill" />
-            </svg>
-            <div class="weather-alert" id="weather-event"></div>
-            <div class="hide">
-              <i class="fas fa-exclamation-triangle weather-alert-description" id="weather-alert-description"></i>
+              <div class="weatherEventElement" id="weather-event-element">
+                <details>
+                  <summary class="weather-alert" id="weather-event"></summary>
+                  <div
+                    class="weather-alert-description"
+                    id="weather-alert-description"
+                  ></div>
+                </details>
+              </div>
             </div>
-          </div>
-              </div>
-              <h1 class="card-text currently-in">
-                <span id="city-display"></span>
-              </h1>
-              <p class="current-time">Last updated: <span id="date"></span></p>
-              <div class="row">
+            <h1 class="card-text currently-in">
+              <span id="city-display"></span>
+            </h1>
+            <p class="current-time">Last updated: <span id="date"></span></p>
+            <div class="row">
+              <div class="col-6">
+                <h2 class="card-text current-weather">
+                  <img src="" alt="" id="weather-icon" />
+                  <div class="weather-conditions" id="weather-conditions"></div>
+                </h2>
 
-                <div class="col-6">
-                  <h2 class="card-text current-weather">
-                    <img src="" alt="" id="weather-icon">
-                    <div class="weather-conditions" id="weather-conditions"></div>
-                  </h2>
-                  
-                  <h3 class="card-text current-temperature">
-                    <span id="temperature"></span>
-                  </h3>
-                  <p class="temperature-details opacity-75" id="temperature-details">
-                  </p>
-                  <button class="btn btn-secondary btn-sm unit-button" id="unit-button">Switch units</button>
-                </div>
-                <div class="col-6">
-                  <ul class="weather-stats">
-                    <li><i class="fas fa-tint"></i> Humidity: <span  id="humidity"></span>
-                    </li>
-                    <br>
-                    <li><i class="fas fa-wind"></i> Wind: <span id="wind"></span> 
-                    </li>
-                  </ul>
-                </div>
+                <h3 class="card-text current-temperature">
+                  <span id="temperature"></span>
+                </h3>
+                <p
+                  class="temperature-details opacity-75"
+                  id="temperature-details"
+                ></p>
+                <button
+                  class="btn btn-secondary btn-sm unit-button"
+                  id="unit-button"
+                >
+                  Switch units
+                </button>
               </div>
-              <br />
-              <br />
-              <div class="weather-forecast" id="forecast">
-                <div class="row">
-                  <div class="col">
-                    <div class="weather-forecast-date">
-                      Friday
-                    </div>
-                    <div class="weather-forecast-icon">
-                      <img src="https://openweathermap.org/img/wn/04n@2x.png" alt="" width="60">
-                    </div>
-                    <div class="weather-forecast-temperature">
-                      <span class="weather-forecast-temperature-max">16°</span>
-                      <span class="weather-forecast-temperature-min">2°</span>
-                    </div>
+              <div class="col-6">
+                <ul class="weather-stats">
+                  <li>
+                    <i class="fas fa-tint"></i> Humidity:
+                    <span id="humidity"></span>
+                  </li>
+                  <br />
+                  <li>
+                    <i class="fas fa-wind"></i> Wind: <span id="wind"></span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="weather-forecast" id="forecast">
+              <div class="row">
+                <div class="col">
+                  <div class="weather-forecast-date">Friday</div>
+                  <div class="weather-forecast-icon">
+                    <img
+                      src="https://openweathermap.org/img/wn/04n@2x.png"
+                      alt=""
+                      width="60"
+                    />
+                  </div>
+                  <div class="weather-forecast-temperature">
+                    <span class="weather-forecast-temperature-max">16°</span>
+                    <span class="weather-forecast-temperature-min">2°</span>
                   </div>
                 </div>
               </div>
@@ -146,7 +144,22 @@
           </div>
         </div>
       </div>
-      <div class="github-link"><small>This page was <a class="github-link" href="https://github.com/jdrozen/sheCodes-weather-app" target="blank">coded</a> by <a href="http://jennie.codes" class="jennie-codes-link" target="blank">Jennie Rozenberg</a></small></div>
+      <div class="github-link">
+        <small
+          >This page was
+          <a
+            class="github-link"
+            href="https://github.com/jdrozen/sheCodes-weather-app"
+            target="blank"
+            >coded</a
+          >
+          by
+          <a href="http://jennie.codes" class="jennie-codes-link" target="blank"
+            >Jennie Rozenberg</a
+          ></small
+        >
+      </div>
+    </div>
     <script src="src/index.js"></script>
   </body>
 </html>

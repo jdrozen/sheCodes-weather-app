@@ -20,20 +20,27 @@ body {
   background: none;
   color: #4284f2;
 }
-.hide {
-  display: none;
+
+details {
+  border: 1px solid #aaa;
+  background: #fff2cd;
+  border-radius: 4px;
+  padding: 0.5em 0.5em 0;
 }
 
-.weather-alert {
-  cursor: pointer;
+summary {
+  font-weight: bold;
+  margin: -0.5em -0.5em 0;
+  padding: 0.5em;
 }
 
-.weather-alert:hover + .hide {
-  margin-left: 5px;
-  display: block;
-  color: #e67331;
-  font-size: 16px;
-  font-weight: bolder;
+details[open] {
+  padding: 0.5em;
+}
+
+details[open] summary {
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 0.5em;
 }
 
 .currently-in {
@@ -66,9 +73,10 @@ body {
   font-family: "PT Mono", monospace;
 }
 .current-time {
-  font-size: 10px;
+  font-size: 12px;
 }
 .weather-forecast {
+  margin-top: 20px;
   font-size: 18px;
   text-align: center;
 }
