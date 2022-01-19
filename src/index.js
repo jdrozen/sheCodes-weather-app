@@ -149,11 +149,10 @@ function handleForecastApiResponse(response) {
   FORECAST = forecastData;
   displayForecast(forecastData);
   let alertElement = document.querySelector("#weather-event-element");
-  console.log(response.data.alerts);
   if (response.data.alerts) {
     let alertHTML = `<details>
-    <summary class="weather-alert" id="weather-event"><i class="fas fa-bell"></i> ${response.data.alerts[0].event}</summary>
-    <div class="weather-alert-description" id="weather-alert-description">${response.data.alerts[0].description}</div>
+    <summary class="weather-alert" id="weather-event"><i class="fas fa-exclamation-circle"></i> ${response.data.alerts[0].event}</summary>
+    <pre class="weather-alert-description" id="weather-alert-description">${response.data.alerts[0].description}</pre>
   </details>`;
     alertElement.innerHTML = alertHTML;
   } else {
