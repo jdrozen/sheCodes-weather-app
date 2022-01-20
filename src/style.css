@@ -133,5 +133,7 @@ details[open] summary {
 }
 
 #current-location {
-  display: inline-block;
+  padding-left: 8px;
+  padding-top: 3px;
+  font-size: 25px;
 }
