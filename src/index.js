@@ -99,7 +99,7 @@ function geoLocationCallback(position) {
 
 function handleSearchCurrentLocation() {
   let loaderElement = document.querySelector("#current-location");
-  loaderElement.innerHTML = `<div class="spinner-border spinner-border-md text-primary" role="status">
+  loaderElement.innerHTML = `<div class="spinner-border spinner-border-sm text-primary" role="status">
   <span class="visually-hidden">Loading...</span></div>`;
   navigator.geolocation.getCurrentPosition(geoLocationCallback);
 }
@@ -216,5 +216,5 @@ searchCurrentLocation.addEventListener("click", handleSearchCurrentLocation);
 let unitButton = document.querySelector("#unit-button");
 unitButton.addEventListener("click", handleSwitchUnit);
 
-let cityForm = document.querySelector("#search-button");
-cityForm.addEventListener("click", handleCityFormSubmission);
+let cityForm = document.querySelector("#city-form");
+cityForm.addEventListener("submit", handleCityFormSubmission);

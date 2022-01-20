@@ -133,7 +133,5 @@ details[open] summary {
 }
 
 #current-location {
-  padding-left: 8px;
-  padding-top: 3px;
-  font-size: 25px;
+  display: inline-block;
 }
