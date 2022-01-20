@@ -131,3 +131,7 @@ details[open] summary {
   display: block;
   margin: 0 auto;
 }
+
+#current-location {
+  display: inline-block;
+}

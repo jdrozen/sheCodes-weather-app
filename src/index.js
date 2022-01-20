@@ -98,12 +98,15 @@ function geoLocationCallback(position) {
 }
 
 function handleSearchCurrentLocation() {
+  let loaderElement = document.querySelector("#current-location");
+  loaderElement.innerHTML = `<div class="spinner-border spinner-border-sm text-primary" role="status">
+  <span class="visually-hidden">Loading...</span></div>`;
   navigator.geolocation.getCurrentPosition(geoLocationCallback);
 }
 
 function showCurrentTemperature(response) {
   // First, unpack the response
-  console.log(response.data);
+  console.log(response);
   let cityName = response.data.name;
   let country = response.data.sys.country;
   let weatherConditions = response.data.weather[0].description;
@@ -120,6 +123,7 @@ function showCurrentTemperature(response) {
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
   let date = document.querySelector("#date");
+  let loaderElement = document.querySelector("#current-location");
 
   // Lastly, update the innerHTML
   cityDisplay.innerHTML = `${cityName}, ${country}`;
@@ -134,6 +138,7 @@ function showCurrentTemperature(response) {
   humidityElement.innerHTML = `${response.data.main.humidity}%`;
   windElement.innerHTML = `${Math.round(response.data.wind.speed)} mph`;
   date.innerHTML = `${formatDate(timestamp)}`;
+  loaderElement.innerHTML = `<button class="fas fa-location-arrow"></button>`;
 
   showForecast(response.data.coord);
 }
