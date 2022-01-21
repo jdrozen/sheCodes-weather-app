@@ -137,3 +137,7 @@ details[open] summary {
   padding-top: 3px;
   font-size: 25px;
 }
+
+#search-button.btn.btn-warning {
+  border-radius: 0px 4px 4px 0px;
+}
