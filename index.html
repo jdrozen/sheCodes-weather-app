@@ -33,21 +33,21 @@
     <div class="container shadow p-3 mb-5 bg-body rounded">
       <div class="card">
         <div class="card-header">
-          <form class="city-prompt" id="city-form">
+          <div class="input-group mb-3 city-search">
             <input
               type="text"
+              class="form-control"
               id="city-input"
               placeholder="What city are you in?"
+              aria-label="City Search"
             />
-            <input
-              type="submit"
-              class="btn btn-warning search"
-              value="Search"
-            />
-            <div id="current-location">
+            <button class="btn btn-warning" type="button" id="search-button">
+              Search
+            </button>
+            <span id="current-location">
               <button class="fas fa-location-arrow"></button>
-            </div>
-          </form>
+            </span>
+          </div>
         </div>
         <div class="card-body">
           <div class="row">
