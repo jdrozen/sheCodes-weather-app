@@ -33,7 +33,7 @@
     <div class="container shadow p-3 mb-5 bg-body rounded">
       <div class="card">
         <div class="card-header">
-          <form class="city-prompt input-group-append" id="city-form">
+          <form class="city-prompt" id="city-form">
             <input
               type="text"
               id="city-input"
@@ -86,12 +86,17 @@
             <div class="row">
               <div class="col-6">
                 <h2 class="card-text current-weather">
-                  <img src="" alt="" class="weather-icon" id="weather-icon" />
+                  <img src="" alt="" id="weather-icon" />
                   <div class="weather-conditions" id="weather-conditions"></div>
                 </h2>
+
                 <h3 class="card-text current-temperature">
                   <span id="temperature"></span>
                 </h3>
+                <p
+                  class="temperature-details opacity-75"
+                  id="temperature-details"
+                ></p>
                 <button
                   class="btn btn-secondary btn-sm unit-button"
                   id="unit-button"
@@ -108,11 +113,6 @@
                   <br />
                   <li>
                     <i class="fas fa-wind"></i> Wind: <span id="wind"></span>
-                  </li>
-                  <br />
-                  <li>
-                    <i class="fas fa-thermometer-full"></i> Feels Like:
-                    <span id="temperature-details"></span>
                   </li>
                 </ul>
               </div>

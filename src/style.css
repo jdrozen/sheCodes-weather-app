@@ -10,7 +10,7 @@ body {
 
 .city-prompt,
 .search {
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
 }
 
@@ -52,11 +52,12 @@ details[open] summary {
 }
 
 .current-weather {
+  font-size: 30px;
   text-align: center;
 }
 
-.weather-icon {
-  height: 100px;
+.current-weather-icon {
+  font-size: 50px;
   opacity: 75%;
 }
 .current-temperature {
@@ -75,7 +76,7 @@ details[open] summary {
   font-size: 12px;
 }
 .weather-forecast {
-  margin-top: 35px;
+  margin-top: 20px;
   font-size: 18px;
   text-align: center;
 }
@@ -106,7 +107,6 @@ details[open] summary {
 
 .weather-conditions {
   text-transform: capitalize;
-  font-size: 30px;
 }
 
 .github-link {
@@ -116,15 +116,14 @@ details[open] summary {
 
 .weather-stats {
   list-style: none;
-  padding-top: 50px;
-  font-size: 15px;
+  padding-top: 80px;
+  font-size: 18px;
   font-family: "PT Mono", monospace;
   text-align: left;
 }
 .fa-cloud-rain,
 .fa-tint,
-.fa-wind,
-.fa-thermometer-full {
+.fa-wind {
   font-size: 20px;
 }
 
