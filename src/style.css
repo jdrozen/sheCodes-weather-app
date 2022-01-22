@@ -127,11 +127,26 @@ details[open] summary {
   font-size: 20px;
 }
 
-.unit-button {
-  display: block;
-  margin: 0 auto;
+.units {
+  display: inline-block;
+  font-size: 16px;
+  vertical-align: top;
+  display: inline-block;
+  margin-top: 8px;
 }
 
+.unit-button {
+  border: none;
+  background: none;
+  padding-left: 0;
+}
+.alt-unit {
+  opacity: 0.5;
+}
+
+.alt-unit:hover {
+  text-decoration: underline;
+}
 #current-location {
   padding-left: 8px;
   padding-top: 3px;
@@ -140,4 +155,10 @@ details[open] summary {
 
 #search-button.btn.btn-warning {
   border-radius: 0px 4px 4px 0px;
+}
+
+.fa-search-location {
+  display: inline-block;
+  padding-left: 5px;
+  opacity: 0.75;
 }

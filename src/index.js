@@ -63,24 +63,40 @@ function queryCityApi(city) {
 
 //Handlers//
 function handleSwitchUnit(event) {
+  let units = document.querySelector("#units");
   // Calculate the new temperature
   if (UNITS === "F") {
     TEMPERATURE = convertFToC(TEMPERATURE);
     FEELS_LIKE = convertFToC(FEELS_LIKE);
     UNITS = "C";
+    units.innerHTML = `
+    <button class="unit-button" id="unit-button">
+    <span class="alt-unit"> °F</span>
+    </button>|
+      <strong class="current-unit"> °C</strong>
+    `;
   } else {
     TEMPERATURE = convertCToF(TEMPERATURE);
     FEELS_LIKE = convertCToF(FEELS_LIKE);
     UNITS = "F";
+
+    units.innerHTML = `<strong class="current-unit"> °F</strong> |
+    <button class="unit-button" id="unit-button">
+      <span class="alt-unit">°C</span>
+    </button>`;
   }
   // Set the HTML to have the new temperature
   let HTMLTemperature = document.querySelector("#temperature");
-  HTMLTemperature.innerHTML = `${TEMPERATURE}°${UNITS}`;
+  HTMLTemperature.innerHTML = `${TEMPERATURE}°`;
   let feelsLike = document.querySelector("#temperature-details");
   feelsLike.innerHTML = `The temperature feels like ${FEELS_LIKE}°${UNITS}`;
 
   //Re-display Forecast (it handles its own unit conversion)
   displayForecast(FORECAST);
+
+  // Deleting the button, need to re-register the event listener
+  let unitButton = document.querySelector("#unit-button");
+  unitButton.addEventListener("click", handleSwitchUnit);
 }
 
 function handleCityFormSubmission(event) {
@@ -132,7 +148,7 @@ function showCurrentTemperature(response) {
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   weatherIcon.setAttribute("alt", response.data.weather[0].description);
-  displayTemperature.innerHTML = `${TEMPERATURE}°${UNITS}`;
+  displayTemperature.innerHTML = `${TEMPERATURE}`;
   feelsLike.innerHTML = `The temperature feels like ${FEELS_LIKE}°${UNITS}`;
   displayWeatherConditions.innerHTML = weatherConditions;
   humidityElement.innerHTML = `${response.data.main.humidity}%`;

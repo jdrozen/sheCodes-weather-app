@@ -42,7 +42,7 @@
               aria-label="City Search"
             />
             <button class="btn btn-warning" type="button" id="search-button">
-              Search
+              Search<i class="fas fa-search-location"></i>
             </button>
             <span id="current-location">
               <button class="fas fa-location-arrow"></button>
@@ -92,17 +92,17 @@
 
                 <h3 class="card-text current-temperature">
                   <span id="temperature"></span>
+                  <div class="units" id="units">
+                    <strong class="current-unit"> °F</strong> |
+                    <button class="unit-button" id="unit-button">
+                      <span class="alt-unit">°C</span>
+                    </button>
+                  </div>
                 </h3>
                 <p
                   class="temperature-details opacity-75"
                   id="temperature-details"
                 ></p>
-                <button
-                  class="btn btn-secondary btn-sm unit-button"
-                  id="unit-button"
-                >
-                  Switch units
-                </button>
               </div>
               <div class="col-6">
                 <ul class="weather-stats">
