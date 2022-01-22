@@ -89,7 +89,7 @@ function handleSwitchUnit(event) {
   let HTMLTemperature = document.querySelector("#temperature");
   HTMLTemperature.innerHTML = `${TEMPERATURE}°`;
   let feelsLike = document.querySelector("#temperature-details");
-  feelsLike.innerHTML = `The temperature feels like ${FEELS_LIKE}°${UNITS}`;
+  feelsLike.innerHTML = `${FEELS_LIKE}°${UNITS}`;
 
   //Re-display Forecast (it handles its own unit conversion)
   displayForecast(FORECAST);
@@ -149,7 +149,7 @@ function showCurrentTemperature(response) {
   );
   weatherIcon.setAttribute("alt", response.data.weather[0].description);
   displayTemperature.innerHTML = `${TEMPERATURE}`;
-  feelsLike.innerHTML = `The temperature feels like ${FEELS_LIKE}°${UNITS}`;
+  feelsLike.innerHTML = `${FEELS_LIKE}°${UNITS}`;
   displayWeatherConditions.innerHTML = weatherConditions;
   humidityElement.innerHTML = `${response.data.main.humidity}%`;
   windElement.innerHTML = `${Math.round(response.data.wind.speed)} mph`;

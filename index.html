@@ -42,7 +42,7 @@
               aria-label="City Search"
             />
             <button class="btn btn-warning" type="button" id="search-button">
-              Search<i class="fas fa-search-location"></i>
+              Search<i class="fas fa-search"></i>
             </button>
             <span id="current-location">
               <button class="fas fa-location-arrow"></button>
@@ -99,10 +99,6 @@
                     </button>
                   </div>
                 </h3>
-                <p
-                  class="temperature-details opacity-75"
-                  id="temperature-details"
-                ></p>
               </div>
               <div class="col-6">
                 <ul class="weather-stats">
@@ -113,6 +109,11 @@
                   <br />
                   <li>
                     <i class="fas fa-wind"></i> Wind: <span id="wind"></span>
+                  </li>
+                  <br />
+                  <li>
+                    <i class="fas fa-thermometer-full"></i> Feels Like:
+                    <span id="temperature-details"></span>
                   </li>
                 </ul>
               </div>
