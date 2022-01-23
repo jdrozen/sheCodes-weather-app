@@ -47,22 +47,24 @@ details[open] summary {
   padding-top: 10px;
   font-style: italic;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 40px;
   text-align: center;
 }
 
 .current-weather {
   font-size: 30px;
   text-align: center;
+  margin: 0 auto;
 }
 
-.current-weather-icon {
-  font-size: 50px;
-  opacity: 75%;
+#weather-icon {
+  width: 100px;
+  height: 100px;
 }
 .current-temperature {
   text-align: center;
-  font-size: 40px;
+  font-size: 60px;
+  padding-top: 35px;
 }
 
 .temperature-details,
@@ -107,6 +109,7 @@ details[open] summary {
 
 .weather-conditions {
   text-transform: capitalize;
+  font-size: 20px;
 }
 
 .github-link {
@@ -116,8 +119,8 @@ details[open] summary {
 
 .weather-stats {
   list-style: none;
-  padding-top: 80px;
-  font-size: 18px;
+  padding-top: 35px;
+  font-size: 15px;
   font-family: "PT Mono", monospace;
   text-align: left;
 }
@@ -130,7 +133,7 @@ details[open] summary {
 
 .units {
   display: inline-block;
-  font-size: 16px;
+  font-size: 18px;
   vertical-align: top;
   display: inline-block;
   margin-top: 8px;
